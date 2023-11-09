@@ -1,0 +1,29 @@
+/* /static/style.css */
+body {
+    background-color: #282c35;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+h1 {
+    color: #61dafb;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Add some style to the result */
+#result {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
