@@ -2,10 +2,11 @@ from flask import render_template, jsonify, request
 from . import main_bp
 from ..ai.test_ai_module import analyze_sentiment, preprocess_text
 from ..ai.Keyword_extractor import keybert
+from ..ai.Question_generator import kobart
 
 @main_bp.route('/', methods=['GET'])
 def home():
-    return 'Home'
+    return render_template('home.html')
 
 @main_bp.route('/extract_keywords', methods=['POST'])
 def extract_keywords():
@@ -31,9 +32,9 @@ def generate_questions():
         doc = data.get('text', '')
         n = data.get('n', '')
         
+        questions = kobart(doc,n)
         
-        
-        return jsonify({})
+        return jsonify({questions})
 
 
 #테스트용

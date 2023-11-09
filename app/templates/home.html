@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+</head>
+<div class="container">
+        <h1>Welcome to the Home Page</h1>
+
+        <!-- First link container -->
+        <div class="linkBox" onclick="copyLink('http://127.0.0.1:5000/main/extract_keywords')">
+            <p>Go to Extract Keywords</p>
+        </div>
+
+        <!-- Second link container -->
+        <div class="linkBox" onclick="copyLink('http://127.0.0.1:5000/main/generate_questions')">
+            <p>Go to Create Questions</p>
+        </div>
+    </div>
+
+    <script>
+        function copyLink(linkText) {
+            // 임시적으로 textarea를 생성하여 텍스트를 넣고 선택
+            var textarea = document.createElement('textarea');
+            textarea.value = linkText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            // 복사 명령 실행
+            document.execCommand('copy');
+            
+            // 생성한 textarea 제거
+            document.body.removeChild(textarea);
+
+            alert('Link copied to clipboard!');
+        }
+    </script>
+</html>
