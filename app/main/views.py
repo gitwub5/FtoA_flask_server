@@ -1,7 +1,7 @@
 from flask import render_template, jsonify, request
 from . import main_bp
 from ..ai.test_ai_module import analyze_sentiment, preprocess_text
-from ..ai.KeywordGeneration import keybert
+from ..ai.Keyword_extractor import keybert
 
 @main_bp.route('/', methods=['GET'])
 def home():
@@ -23,6 +23,17 @@ def extract_keywords():
         return jsonify({"keywords": keywords})
     
 
+
+@main_bp.route('/generate_questions', methods=['POST'])
+def generate_questions():
+    if request.method == 'POST':
+        data = request.get_json()
+        doc = data.get('text', '')
+        n = data.get('n', '')
+        
+        
+        
+        return jsonify({})
 
 
 #테스트용

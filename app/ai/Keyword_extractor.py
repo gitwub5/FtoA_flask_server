@@ -3,15 +3,18 @@ from kiwipiepy import Kiwi
 from transformers import BertModel
 
 
-def Noun_extractor(doc):
-  results = []
-  kiwi = Kiwi()
-  result = kiwi.analyze(doc)
-  for token, pos, _, _ in result[0][0]:
-      if len(token) != 1 and pos.startswith('N') or pos.startswith('SL'):
-          results.append(token)
-  doc = ' '.join(results)
-  return doc
+def noun_extractor(list):
+  result_list = []
+  for text in list:
+    results = []
+    kiwi = Kiwi()
+    result = kiwi.analyze(text)
+    for token, pos, _, _ in result[0][0]:
+        if len(token) != 1 and pos.startswith('N') or pos.startswith('SL'):
+            results.append(token)
+    text =  ' '.join(results)
+    result_list.append(text)
+  return result_list
 
 
 #키워드 추출 모델 (문서랑 키워드 개수 파라미터로 입력)
@@ -44,3 +47,7 @@ kw_model = KeyBERT()
 keywords = kw_model.extract_keywords(doc)
 print(keywordtext = kw_model.extract_keywords(doc2, highlight=True,top_n=5))
 """
+
+list = keybert(doc1,5)
+print(noun_extractor(list))
+#print(list)
