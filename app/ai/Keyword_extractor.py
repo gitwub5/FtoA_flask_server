@@ -2,7 +2,7 @@ from keybert import KeyBERT
 from kiwipiepy import Kiwi
 from transformers import BertModel
 
-
+#명사만 추출
 def noun_extractor(list):
   result_list = []
   for text in list:

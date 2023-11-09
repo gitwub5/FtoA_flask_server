@@ -1,6 +1,6 @@
 from flask import render_template, jsonify, request
 from . import main_bp
-from ..ai.test_ai_module import analyze_sentiment, preprocess_text
+from ..test.test_ai_module import analyze_sentiment, preprocess_text
 from ..ai.Keyword_extractor import keybert
 from ..ai.Question_generator import kobart
 
@@ -11,19 +11,15 @@ def home():
 @main_bp.route('/extract_keywords', methods=['POST'])
 def extract_keywords():
     if request.method == 'POST':
-        # Assuming the text is sent in the request body as 'text'
         data = request.get_json()
         doc = data.get('text', '')
         doc = '"""' + doc + '"""'
-        #n = data에서 n 값 받아오기!
         n = data.get('n', '')
         
         keywords = keybert(doc,n)
         
-        # Return the extracted keywords as JSON
         return jsonify({"keywords": keywords})
     
-
 
 @main_bp.route('/generate_questions', methods=['POST'])
 def generate_questions():
@@ -37,10 +33,10 @@ def generate_questions():
         return jsonify({questions})
 
 
+
 #테스트용
 @main_bp.route('/analyze_sentiment', methods=['GET'])
 def analyze_sentiment_route():
-    # 하드코딩된 텍스트를 사용하여 감정 분석 실행
     sample_text = "I love this product! It's amazing."
 
     sentiment = analyze_sentiment(sample_text)
