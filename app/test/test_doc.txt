@@ -1,0 +1,16 @@
+<키워드 생성 모델 테스트>
+#Example text
+doc1 = """ 임진왜란은 1592년(선조 25)부터 1598년까지 2차에 걸쳐서 우리나라에 침입한 일본과의 싸움이다. 
+
+엄청난 시련을 겪으면서도 끈질긴 저항으로 이겨내고 각성과 자기성찰을 바탕으로 민족의 운명을 새로 개척해나간 계기가 된 전쟁이다.
+"""
+doc2 = """A database is an organized collection of structured information, or data, typically stored electronically in a computer system. A database is usually controlled by a database management system (DBMS). Together, the data and the DBMS, along with the applications that are associated with them, are referred to as a database system, often shortened to just database.
+
+Data within the most common types of databases in operation today is typically modeled in rows and columns in a series of tables to make processing and data querying efficient. The data can then be easily accessed, managed, modified, updated, controlled, and organized. Most databases use structured query language (SQL) for writing and querying data."""
+doc3 = """data 전송/유입이 proxy를 통해서 이루어지므로 virus wall로써 적용할 수 있고 반대로 data 전송할 때 packet을 다 볼 수 있으므로 감시도 가능하다."""
+
+doc4 = """운영체제 (Operating System)란? 운영체제(OS)는 쉽게 이야기해서 하드웨어를 관리하는 프로그램입니다. 운영체제는 컴퓨터를 각종 하드웨어 자원과 소프트웨어 자원을 효율적으로 운영관리함으로써 사용자가 시스템을 이용하는데 편리함을 제공하는 소프트웨어입니다"""
+#Test
+#list = keybert(doc4,2)
+#print(list)
+
