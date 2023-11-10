@@ -28,10 +28,12 @@ def generate_questions():
         data = request.get_json()
         doc = data.get('text', '')
         n = data.get('n', '')
+        if(n>3):
+            n = 3
         
-        question_answer = create_question(doc,n)
+        QnA = create_question(doc,n)
         
-        return jsonify({"question and answer": question_answer})
+        return jsonify({"QnA": QnA})
 
 
 

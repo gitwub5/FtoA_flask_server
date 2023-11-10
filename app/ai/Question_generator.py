@@ -2,7 +2,7 @@ import torch
 from transformers import PreTrainedTokenizerFast
 from transformers import BartForConditionalGeneration
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
-from Keyword_extractor import keybert
+from ..ai.Keyword_extractor import keybert
 
 def kobart(doc,n):
     tokenizer = PreTrainedTokenizerFast.from_pretrained('Sehong/kobart-QuestionGeneration')
@@ -20,9 +20,6 @@ def kobart(doc,n):
     return question_list
 
 def create_question(doc,n):
-    #질문 개수 최대 3개
-    if n > 3:
-        n = 3
     keyword_list = keybert(doc, n)
     question_list = []
 
@@ -32,8 +29,8 @@ def create_question(doc,n):
         cleaned_question = question.replace('<pad>', '').replace('</s>', '').strip()
         question_list.append(cleaned_question)
     
-    question_answer = (question_list, keyword_list)
-    return question_answer
+    QnA = (question_list, keyword_list)
+    return QnA
 
 
 def get_question(answer, context, max_length=128):
@@ -50,6 +47,5 @@ def get_question(answer, context, max_length=128):
     return tokenizer.decode(output[0])
 
 context = "운영체제(Operating System, OS)는 컴퓨터 시스템의 핵심 소프트웨어로, 컴퓨터의 하드웨어와 다양한 응용 프로그램 간의 효율적이고 원활한 상호 작용을 조정하고 관리하는 시스템 소프트웨어입니다. 이 소프트웨어는 컴퓨터의 자원을 효율적으로 활용하며, 사용자 및 응용 프로그램이 하드웨어와 원활하게 상호 작용할 수 있도록 지원합니다. 또한 파일 시스템을 통해 데이터를 저장하고 관리하며, 프로세스 관리, 메모리 관리, 입출력 관리 등 다양한 기능을 제공하여 컴퓨터 시스템의 핵심 기능을 담당합니다."
-
-questions = create_question(context,2)
-print(questions)
+#questions = create_question(context,2)
+#print(questions)
