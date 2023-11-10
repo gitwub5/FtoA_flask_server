@@ -1,3 +1,4 @@
+#테스트용 views
 import json
 from flask import render_template, jsonify, request
 from . import main_bp
@@ -12,13 +13,7 @@ def extract_keywords():
         data = request.get_json()
         doc = data.get('text', '')
         
-        keywords = [
-            "운영체제",
-            "시스템",
-            "operating",
-            "소프트웨어",
-            "효율"
-        ]
+        keywords = ['운영체제', '윈도우', '슈퍼컴퓨터', '프로그램', '전화']
         
         return jsonify({"keywords": keywords})
     
@@ -31,16 +26,8 @@ def generate_questions():
         
         
         QnA =  (
-                [
-                    "컴퓨터의 핵심 소프트웨어는 무엇인가요?",
-                    "운영체제란 무엇인가?",
-                    "운영체제에서 사용자의 데이터를 저장하는 기능은 무엇인가?"
-                ],
-                [
-                    "운영체제",
-                    "소프트웨어",
-                    "데이터"
-                ]
+                ['컴퓨터에서 사용되는 컴퓨터는 무엇인가?', '운영체제는 무엇인가?', '운영체제는 무엇인가?'], 
+                ['운영체제', '프로그램', '전화']
         )
         
         return jsonify({"QnA": QnA})
