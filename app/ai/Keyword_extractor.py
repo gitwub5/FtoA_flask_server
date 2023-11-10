@@ -2,17 +2,22 @@ from keybert import KeyBERT
 from kiwipiepy import Kiwi
 from transformers import BertModel
 
+
+
 #명사만 추출
 def noun_extractor(list):
   result_list = []
+
   for text in list:
     results = []
     kiwi = Kiwi()
     result = kiwi.analyze(text)
+
     for token, pos, _, _ in result[0][0]:
-        if len(token) != 1 and pos.startswith('N') or pos.startswith('SL'):
+        if len(text) != 1 and (pos.startswith('N') or pos.startswith('SL') or pos.startswith('SN')):
             results.append(token)
-    text =  ' '.join(results)
+
+    text =  ''.join(results)
     result_list.append(text)
   return result_list
 
@@ -27,6 +32,8 @@ def keybert(doc,n):
   keyword = kw_model.extract_keywords(doc, keyphrase_ngram_range=(1,1), stop_words=None, top_n=n)
   #키워드만 리스트로 만들기
   keyword_list = [keyword[i][0] for i in range(len(keyword))]
+
+  keyword_list = noun_extractor(keyword_list)
 
   return keyword_list
 
@@ -48,6 +55,7 @@ keywords = kw_model.extract_keywords(doc)
 print(keywordtext = kw_model.extract_keywords(doc2, highlight=True,top_n=5))
 """
 
-list = keybert(doc1,5)
-print(noun_extractor(list))
+#list = keybert(doc1,5)
+#print(list)
+#print(noun_extractor(list))
 #print(list)

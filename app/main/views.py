@@ -30,7 +30,7 @@ def generate_questions():
         
         questions = kobart(doc,n)
         
-        return jsonify({questions})
+        return jsonify(questions)
 
 
 
