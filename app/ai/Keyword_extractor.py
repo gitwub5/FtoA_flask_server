@@ -24,7 +24,8 @@ def noun_extractor(list):
                 results.append(token)
 
         text = ''.join(results)
-        result_list.append(text)
+        if text != '':
+            result_list.append(text)
     return result_list
 
 # 키워드 추출 함수
