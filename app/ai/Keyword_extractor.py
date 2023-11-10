@@ -29,15 +29,18 @@ def keybert(doc,n):
 
   #키워드 생성
   keyword = kw_model.extract_keywords(doc, keyphrase_ngram_range=(1,1), top_n=n, 
-                                      use_mmr = False, stop_words='english', diversity = 0.6, 
-                                      nr_candidates=10)
+                                      use_mmr = True,  diversity = 0.55, stop_words='english',
+                                      nr_candidates=10, use_maxsum= True)
   
   #키워드만 리스트로 만들기
   keyword_list = [keyword[i][0] for i in range(len(keyword))]
   #명사 추출
+  print(keyword_list)
   keyword_list = noun_extractor(keyword_list)
 
   return keyword_list
+
+
 
 #Example text
 doc1 = """ 임진왜란은 1592년(선조 25)부터 1598년까지 2차에 걸쳐서 우리나라에 침입한 일본과의 싸움이다. 
@@ -49,15 +52,7 @@ doc2 = """A database is an organized collection of structured information, or da
 Data within the most common types of databases in operation today is typically modeled in rows and columns in a series of tables to make processing and data querying efficient. The data can then be easily accessed, managed, modified, updated, controlled, and organized. Most databases use structured query language (SQL) for writing and querying data."""
 doc3 = """data 전송/유입이 proxy를 통해서 이루어지므로 virus wall로써 적용할 수 있고 반대로 data 전송할 때 packet을 다 볼 수 있으므로 감시도 가능하다."""
 
+doc4 = """운영체제 (Operating System)란? 운영 체제(OS)는 쉽게 이야기해서 하드웨어를 관리하는 프로그램입니다. 운영체제는 컴퓨터를 각종 하드웨어 자원과 소프트웨어 자원을 효율적으로 운영관리함으로써 사용자가 시스템을 이용하는데 편리함을 제공하는 소프트웨어입니다"""
 #Test
-"""
-list = keybert(doc1, 2)
-print(list)
-kw_model = KeyBERT()
-#키워드 추출할 문서 파라미터로 입력
-keywords = kw_model.extract_keywords(doc)
-print(keywordtext = kw_model.extract_keywords(doc2, highlight=True,top_n=5))
-"""
-
-list = keybert(doc3,5)
-print(list)
+#list = keybert(doc4,5)
+#print(list)
