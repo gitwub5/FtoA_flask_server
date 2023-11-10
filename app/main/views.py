@@ -1,7 +1,6 @@
 import json
 from flask import render_template, jsonify, request
 from . import main_bp
-from ..test.test_ai_module import analyze_sentiment, preprocess_text
 from ..ai.Keyword_extractor import keybert
 from ..ai.Question_generator import create_question
 
@@ -34,30 +33,3 @@ def generate_questions():
         QnA = create_question(doc,n)
         
         return jsonify({"QnA": QnA})
-
-
-
-#테스트용
-@main_bp.route('/analyze_sentiment', methods=['GET'])
-def analyze_sentiment_route():
-    sample_text = "I love this product! It's amazing."
-
-    sentiment = analyze_sentiment(sample_text)
-    return render_template('result.html', result=f"The sentiment is {sentiment}")
-
-#전처리하고 모듈 돌리는 예시 코드
-@main_bp.route('/process_and_analyze', methods=['POST'])
-def process_and_analyze_route():
-    data = request.get_json()
-    text_to_process = data.get('text')
-
-    if not text_to_process:
-        return jsonify({'error': 'Text not provided'}), 400
-
-    # 전처리
-    preprocessed_text = preprocess_text(text_to_process)
-
-    # AI 모델 호출
-    sentiment = analyze_sentiment(preprocessed_text)
-
-    return render_template('result.html', result=f"The sentiment is {sentiment}")
