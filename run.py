@@ -7,4 +7,4 @@ CORS(app)
 
 if __name__ == '__main__':
     app.run(debug=True)
-#디버크 켜져있는지 확인하기
+#디버그 켜져있는지 확인하기

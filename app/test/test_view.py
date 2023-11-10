@@ -1,7 +1,7 @@
 #테스트용 views
 import json
 from flask import render_template, jsonify, request
-from . import main_bp
+from ..main import main_bp
 
 @main_bp.route('/', methods=['GET'])
 def home():
