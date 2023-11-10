@@ -3,7 +3,7 @@ from flask import render_template, jsonify, request
 from . import main_bp
 from ..test.test_ai_module import analyze_sentiment, preprocess_text
 from ..ai.Keyword_extractor import keybert
-from ..ai.Question_generator import kobart
+from ..ai.Question_generator import create_question
 
 @main_bp.route('/', methods=['GET'])
 def home():
@@ -29,9 +29,9 @@ def generate_questions():
         doc = data.get('text', '')
         n = data.get('n', '')
         
-        questions = kobart(doc,n)
+        question_answer = create_question(doc,n)
         
-        return jsonify(questions)
+        return jsonify({"question and answer": question_answer})
 
 
 
