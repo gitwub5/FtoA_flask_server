@@ -1,3 +1,4 @@
+import json
 from flask import render_template, jsonify, request
 from . import main_bp
 from ..test.test_ai_module import analyze_sentiment, preprocess_text

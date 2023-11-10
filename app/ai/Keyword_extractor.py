@@ -1,6 +1,6 @@
 from keybert import KeyBERT
 from kiwipiepy import Kiwi
-from transformers import BertModel
+from transformers import AutoModelForMaskedLM
 
 
 
@@ -24,15 +24,17 @@ def noun_extractor(list):
 
 #키워드 추출 모델 (문서랑 키워드 개수 파라미터로 입력)
 def keybert(doc,n):
-  model = BertModel.from_pretrained('skt/kobert-base-v1')
-  #모델 객체로 불러오기
+  model = AutoModelForMaskedLM.from_pretrained("bert-base-multilingual-cased")
   kw_model = KeyBERT(model)
 
-  #키워드 추출(top_n으로 키워드 개수 조절, 5가 디폴트)
-  keyword = kw_model.extract_keywords(doc, keyphrase_ngram_range=(1,1), stop_words=None, top_n=n)
+  #키워드 생성
+  keyword = kw_model.extract_keywords(doc, keyphrase_ngram_range=(1,1), top_n=n, 
+                                      use_mmr = False, stop_words='english', diversity = 0.6, 
+                                      nr_candidates=10)
+  
   #키워드만 리스트로 만들기
   keyword_list = [keyword[i][0] for i in range(len(keyword))]
-
+  #명사 추출
   keyword_list = noun_extractor(keyword_list)
 
   return keyword_list
@@ -45,6 +47,8 @@ doc1 = """ 임진왜란은 1592년(선조 25)부터 1598년까지 2차에 걸쳐
 doc2 = """A database is an organized collection of structured information, or data, typically stored electronically in a computer system. A database is usually controlled by a database management system (DBMS). Together, the data and the DBMS, along with the applications that are associated with them, are referred to as a database system, often shortened to just database.
 
 Data within the most common types of databases in operation today is typically modeled in rows and columns in a series of tables to make processing and data querying efficient. The data can then be easily accessed, managed, modified, updated, controlled, and organized. Most databases use structured query language (SQL) for writing and querying data."""
+doc3 = """data 전송/유입이 proxy를 통해서 이루어지므로 virus wall로써 적용할 수 있고 반대로 data 전송할 때 packet을 다 볼 수 있으므로 감시도 가능하다."""
+
 #Test
 """
 list = keybert(doc1, 2)
@@ -55,7 +59,5 @@ keywords = kw_model.extract_keywords(doc)
 print(keywordtext = kw_model.extract_keywords(doc2, highlight=True,top_n=5))
 """
 
-#list = keybert(doc1,5)
-#print(list)
-#print(noun_extractor(list))
-#print(list)
+list = keybert(doc3,5)
+print(list)
